@@ -33,10 +33,33 @@ pip install -r requirements.txt
 docker-compose up -d
 ```
 
-### Run the client using streamlit
+### Create an API key from OpenAI
+
+Go to the website and create an API key.
+Link = https://platform.openai.com/api-keys
+
+### Create .env file
+Create a new file called .env in the root directory and add the following line to it.
+Add the API key to the file.
+
+```
+# .env file
+OPENAI_APIKEY="sk-..."
+
+```
+
+### Push the data to the server
+This script will read all the pdf files from the data folder and push it to the server.
 
 ```bash
-streamlit run client.py
+add_data_to_server.py
+```
+
+### Run the client using streamlit
+This will start the streamlit server and you can access the website on the browser.
+
+```bash
+streamlit run application_frontend.py
 ```
 
 
