@@ -33,6 +33,8 @@ def fetch_response_from_weaviate(input_text):
         client.query
         .get("DatacenterDocumentsLocal", ["document", "page", "content"])
         .with_near_text({"concepts": [input_text]})
+        # This is the system prompt 
+        # If you want different answers, add it here. 
         .with_generate(single_prompt="Answer the prompt " + input_text + " and use the following text: {content}. \
                        Always give the reference as well, using document: '{document}' and pagenumber: '{page}'. \
                        Keep it short and simple, format with lists and newlines.")
