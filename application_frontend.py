@@ -10,12 +10,11 @@ import weaviate
 
 dotenv.load_dotenv()
 
-st.title('Data Center Oracle 🔮')
+st.title('Document Chatter 📝')
 
 OPENAI_API_KEY = os.getenv("OPENAI_APIKEY")
-# WEAVIATE_URL = os.getenv("WEAVIATE_URL")
-# WEAVIATE_API_KEY = os.getenv("WEAVIATE_API_KEY")
 
+# Make connection with the Weaviate client, running locally on Docker
 client = weaviate.Client(
     url = "http://localhost:8080",  
     additional_headers = {
@@ -23,11 +22,12 @@ client = weaviate.Client(
     }
 )
 
-
+# Create the output based on the input text
 def generate_response(input_text):
   llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY)
   return llm(input_text)
 
+# Create the output based on the vector database in Weaviate
 def fetch_response_from_weaviate(input_text):
     response = (
         client.query
@@ -47,7 +47,7 @@ def fetch_response_from_weaviate(input_text):
     return answer
 
 
-
+# Create the streamlit form
 with st.form('my_form'):
     text = st.text_area('Enter text:', 'What does the EU say about data center monitoring?')
     choice = st.radio('Select model:', ['GPT', 'RAG'])

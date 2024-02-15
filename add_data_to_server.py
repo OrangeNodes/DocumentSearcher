@@ -34,7 +34,7 @@ class_obj = {
 
 client.schema.create_class(class_obj)
 
-# Preprocess data
+# Preprocess data and add to Weaviate
 for pdfpath in glob.glob("data/*.pdf"):
     print('Processing ', pdfpath, '...')
 
