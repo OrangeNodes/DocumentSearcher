@@ -33,13 +33,13 @@ Install link: https://www.docker.com/products/docker-desktop/
 This will run the Vector Database on the server.
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Create an API key from OpenAI
 From OpenAI we will use two things: The word embeddings and the question answering model.
 To use this we will need to create an API key from the website.
-The costs are not high, but you will need to buy some credits. 
+The costs are not high, but you will need to buy some credits.
 
 Go to the website and create an API key.
 Link = https://platform.openai.com/api-keys
@@ -73,5 +73,3 @@ There are two options:
 ```bash
 streamlit run application_frontend.py
 ```
-
-

@@ -1,4 +1,4 @@
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 import weaviate
 
 import requests
@@ -17,7 +17,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_APIKEY")
 client = weaviate.Client(
     url="http://localhost:8080",
     additional_headers = {
-        "X-OpenAI-Api-Key": OPENAI_API_KEY  
+        "X-OpenAI-Api-Key": OPENAI_API_KEY
     })
 
 client.schema.delete_all()
@@ -25,10 +25,10 @@ client.schema.delete_all()
 # Create class
 class_obj = {
     "class": "DatacenterDocumentsLocal",
-    "vectorizer": "text2vec-openai", 
+    "vectorizer": "text2vec-openai",
     "moduleConfig": {
         "text2vec-openai": {},
-        "generative-openai": {}  
+        "generative-openai": {}
     }
 }
 

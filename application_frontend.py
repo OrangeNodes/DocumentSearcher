@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain.llms import OpenAI
+from langchain_community.llms import OpenAI
 import dotenv
 import os
 
@@ -16,9 +16,9 @@ OPENAI_API_KEY = os.getenv("OPENAI_APIKEY")
 
 # Make connection with the Weaviate client, running locally on Docker
 client = weaviate.Client(
-    url = "http://localhost:8080",  
+    url = "http://localhost:8080",
     additional_headers = {
-        "X-OpenAI-Api-Key": OPENAI_API_KEY  
+        "X-OpenAI-Api-Key": OPENAI_API_KEY
     }
 )
 
@@ -33,8 +33,8 @@ def fetch_response_from_weaviate(input_text):
         client.query
         .get("DatacenterDocumentsLocal", ["document", "page", "content"])
         .with_near_text({"concepts": [input_text]})
-        # This is the system prompt 
-        # If you want different answers, add it here. 
+        # This is the system prompt
+        # If you want different answers, add it here.
         .with_generate(single_prompt="Answer the prompt " + input_text + " and use the following text: {content}. \
                        Always give the reference as well, using document: '{document}' and pagenumber: '{page}'. \
                        Keep it short and simple, format with lists and newlines.")
@@ -62,5 +62,3 @@ with st.form('my_form'):
             print('Processing RAG call in Weaviate...')
             result = fetch_response_from_weaviate(text)
         st.info(result)
-        
-
